@@ -74,6 +74,10 @@ function createServer() {
   app.delete('/users/:id', (req, res) => {
     const id = Number(req.params.id);
 
+    if (!isValidId(id)) {
+      return res.status(400).send('Bad request');
+    }
+
     const index = users.findIndex((u) => u.id === id);
 
     if (index === -1) {
@@ -216,6 +220,10 @@ function createServer() {
 
   app.delete('/expenses/:id', (req, res) => {
     const id = Number(req.params.id);
+
+    if (!isValidId(id)) {
+      return res.status(400).send('Bad request');
+    }
 
     const index = expenses.findIndex((e) => e.id === id);
 
